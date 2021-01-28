@@ -18,13 +18,13 @@ public class EnemyUI : MonoBehaviour
     public void InitializeEnemyUI(string name, int health)
     {
         enemyName.SetText(name);
-        enemyCurrentHealth.SetText(health.ToString() + " HP");
+        enemyCurrentHealth.SetText(health.ToString());
         this.maxHealth = health;
     }
 
     public void UpdateHealthBarUI(int healthToDisplay)
     {
-        enemyCurrentHealth.SetText(healthToDisplay.ToString() + " HP");
+        enemyCurrentHealth.SetText(healthToDisplay.ToString());
         healthBar.value = (float)healthToDisplay / maxHealth;
     }
 }

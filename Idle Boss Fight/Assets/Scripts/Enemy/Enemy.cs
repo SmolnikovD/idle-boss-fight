@@ -11,8 +11,6 @@ public class Enemy : MonoBehaviour
     public EnemyDataSO enemyData;
     public EnemyUI enemyUI;
 
-    public Action OnEnemyDeath;
-
     private void Start()
     {
         Health = enemyData.enemyMaxHealth;
@@ -22,17 +20,7 @@ public class Enemy : MonoBehaviour
     public void GetDamage(int damage)
     {
         Health -= damage;
-        if(Health <= 0)
-        {
-            EnemyDeath();
-        }
+        Debug.Log(Health);
         enemyUI.UpdateHealthBarUI(Health);
-    }
-
-    public void EnemyDeath()
-    {
-        OnEnemyDeath?.Invoke();
-        Debug.Log("Enemy Dead");
-        Destroy(this.gameObject);
     }
 }
