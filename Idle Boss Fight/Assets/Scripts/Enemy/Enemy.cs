@@ -5,18 +5,19 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
+    [SerializeField]
+    private int maxHealth;
     [field: SerializeField]
     private int Health { get; set; }
 
-    public EnemyDataSO enemyData;
     public EnemyUI enemyUI;
 
     public Action OnEnemyDeath;
 
     private void Start()
     {
-        Health = enemyData.enemyMaxHealth;
-        enemyUI.InitializeEnemyUI(enemyData.enemyName, enemyData.enemyMaxHealth);
+        Health = maxHealth;
+        enemyUI.InitializeEnemyUI("Enemy", maxHealth);
     }
 
     public void GetDamage(int damage)

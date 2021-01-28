@@ -11,7 +11,7 @@ public class LevelManager : MonoBehaviour
 
     public int Level { get; set; } = 1;
     private int currentExp = 0;
-    private int expToLevelUp = 10;
+    private int expToLevelUp = 15;
 
     public void AddExperience()
     {
@@ -28,7 +28,7 @@ public class LevelManager : MonoBehaviour
         Level++;
         levelText.SetText(Level.ToString());
         levelProgressBar.value = 0;
-        expToLevelUp = (int)(expToLevelUp * 1.5f);
+        expToLevelUp = (int)(expToLevelUp * 1.8f);
         currentExp = 0;
     }
 }
