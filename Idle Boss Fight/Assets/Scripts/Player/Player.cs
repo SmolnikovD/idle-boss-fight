@@ -9,7 +9,8 @@ public class Player : MonoBehaviour
 
     private PlayerInput playerInput;
 
-    public Enemy enemyTarget;
+    public EnemySpawner enemySpawner;
+    private Enemy enemyTarget;
 
     private void Awake()
     {
@@ -19,29 +20,35 @@ public class Player : MonoBehaviour
     private void OnEnable()
     {
         playerInput.OnPlayerInputPressed += OnPlayerInput;
+        enemySpawner.OnEnemySpawned += OnEnemySpawned;
     }
 
     private void Start()
     {
-        StartCoroutine(DamageCoroutine());
+        StartCoroutine(IdleAttack());
     }
 
-    public void DealDamage(Enemy target)
+    public void Attack()
     {
-        target.GetDamage(Damage);
+        enemyTarget.GetDamage(Damage);
     }
 
-    private IEnumerator DamageCoroutine()
+    private IEnumerator IdleAttack()
     {
         while (true)
         {
             yield return new WaitForSeconds(attackRate);
-            DealDamage(enemyTarget);
+            Attack();
         }
     }
 
     private void OnPlayerInput()
     {
-        DealDamage(enemyTarget);
+        Attack();
+    }
+
+    private void OnEnemySpawned(GameObject enemyGameObject)
+    {
+        enemyTarget = enemyGameObject.GetComponent<Enemy>();
     }
 }
