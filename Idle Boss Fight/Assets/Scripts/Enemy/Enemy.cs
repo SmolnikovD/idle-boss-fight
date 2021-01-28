@@ -6,15 +6,15 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     [SerializeField]
-    private int maxHealth;
+    protected int maxHealth;
     [field: SerializeField]
-    private int Health { get; set; }
+    protected int Health { get; set; }
 
     public EnemyUI enemyUI;
 
     public Action OnEnemyDeath;
 
-    private void Start()
+    protected virtual void Start()
     {
         Health = maxHealth;
         enemyUI.InitializeEnemyUI("Enemy", maxHealth);
@@ -33,7 +33,6 @@ public class Enemy : MonoBehaviour
     public void EnemyDeath()
     {
         OnEnemyDeath?.Invoke();
-        Debug.Log("Enemy Dead");
         Destroy(this.gameObject);
     }
 }
