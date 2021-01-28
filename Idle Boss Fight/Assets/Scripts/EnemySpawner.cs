@@ -5,11 +5,11 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
-    private float enemySpawnDelay = 1f;
-
     public GameObject enemyPrefab;
+    public GameObject spawnedEnemy;
 
     public Action<GameObject> OnEnemySpawned;
+    public Action OnEnemyDeath;
 
     private void Start()
     {
@@ -18,19 +18,14 @@ public class EnemySpawner : MonoBehaviour
 
     public void SpawnEnemy()
     {
-        GameObject enemy = Instantiate(enemyPrefab, transform.position, Quaternion.identity);
-        enemy.GetComponent<Enemy>().OnEnemyDeath += OnEnemyDeath;
-        OnEnemySpawned?.Invoke(enemy);
+        spawnedEnemy = Instantiate(enemyPrefab, transform.position, Quaternion.identity);
+        spawnedEnemy.GetComponent<Enemy>().OnEnemyDeath += OnEnemyDeathCallback;
+        OnEnemySpawned?.Invoke(spawnedEnemy);
     }
 
-    public void OnEnemyDeath()
+    public void OnEnemyDeathCallback()
     {
-        StartCoroutine(WaitBeforeNextEnemySpawn());
-    }
-
-    private IEnumerator WaitBeforeNextEnemySpawn()
-    {
-        yield return new WaitForSeconds(enemySpawnDelay);
+        OnEnemyDeath?.Invoke();
         SpawnEnemy();
     }
 }
