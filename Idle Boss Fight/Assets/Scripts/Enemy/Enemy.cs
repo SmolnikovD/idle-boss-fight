@@ -8,7 +8,7 @@ public class Enemy : MonoBehaviour
     [SerializeField]
     protected int maxHealth;
     [field: SerializeField]
-    protected int Health { get; set; }
+    public int Health { get; set; }
 
     public EnemyUI enemyUI;
 

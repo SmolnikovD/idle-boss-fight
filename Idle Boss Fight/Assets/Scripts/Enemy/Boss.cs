@@ -16,7 +16,12 @@ public class Boss : Enemy
     protected override void EnemyDeath()
     {
         OnBossDefeated?.Invoke();
-
         base.EnemyDeath();
+    }
+
+    public void BossDissappeared()
+    {
+        OnEnemyDeath?.Invoke(); // TODO Босс здесь не умирает, нужен другой ивент
+        Destroy(this.gameObject);
     }
 }

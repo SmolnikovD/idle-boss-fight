@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
     public Player player;
     public LevelManager levelManager;
     public EnemyController enemyController;
+    public UIController uiController;
 
     private void Awake()
     {
@@ -17,6 +18,8 @@ public class GameManager : MonoBehaviour
     {
         enemyController.OnEnemyDeath += levelManager.AddExperience;
         enemyController.OnBossDefeated += levelManager.LevelUp;
-    }
-    
+        enemyController.OnBossFightTimerEnded += levelManager.LevelDown;
+        uiController.OnFightBossButtonPressed += enemyController.PrepareBossFight;
+        levelManager.OnLevelUpReady += () => uiController.SetFightBossButton(true);
+    }  
 }

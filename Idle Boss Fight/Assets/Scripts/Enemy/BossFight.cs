@@ -6,18 +6,22 @@ using UnityEngine;
 public class BossFight : MonoBehaviour
 {
     [SerializeField]
-    private float timer;
+    public float timer;
 
     public Action OnBossFightTimerEnded;
 
-    public void StartBossFightTimer()
+    public void StartBossFightTimer(Boss boss)
     {
-        StartCoroutine(BossFightTimerCoroutine());
+        StartCoroutine(BossFightTimerCoroutine(boss));
     }
 
-    private IEnumerator BossFightTimerCoroutine()
+    private IEnumerator BossFightTimerCoroutine(Boss boss)
     {
         yield return new WaitForSeconds(timer);
-        OnBossFightTimerEnded?.Invoke();
+        if (boss.Health > 0)
+        {
+            OnBossFightTimerEnded?.Invoke();
+            boss.BossDissappeared();
+        }
     }
 }

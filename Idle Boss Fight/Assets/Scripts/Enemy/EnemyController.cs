@@ -9,12 +9,14 @@ public class EnemyController : MonoBehaviour
     private EnemySpawner spawner;
     [SerializeField]
     private BossFight bossFight;
+    [SerializeField]
+    private ParticleSystem bossDissappearingVFX;
+
 
     public Action<GameObject> OnEnemySpawned;
     public Action OnEnemyDeath;
     public Action OnBossFightTimerEnded;
     public Action OnBossDefeated;
-
 
     private void Awake()
     {
@@ -22,6 +24,7 @@ public class EnemyController : MonoBehaviour
         spawner.OnEnemyDeath += OnEnemyDeath;
         spawner.OnBossDefeated += OnBossDefeated;
         bossFight.OnBossFightTimerEnded += OnBossFightTimerEnded;
+        bossFight.OnBossFightTimerEnded += () => bossDissappearingVFX.Play();
     }
 
     public void PrepareBossFight()
@@ -30,9 +33,10 @@ public class EnemyController : MonoBehaviour
         spawner.OnEnemySpawned += StartBossFightTimer;
     }
 
-    private void StartBossFightTimer(GameObject go)
+    private void StartBossFightTimer(GameObject bossGameObject)
     {
-        bossFight.StartBossFightTimer();
+        bossFight.StartBossFightTimer(bossGameObject.GetComponent<Boss>());
         spawner.OnEnemySpawned -= StartBossFightTimer;
+        bossGameObject.GetComponentInChildren<BossTimerUI>().BossTime = bossFight.timer;
     }
 }
