@@ -6,7 +6,7 @@ public class GameManager : MonoBehaviour
 {
     public Player player;
     public LevelManager levelManager;
-    public EnemySpawner enemySpawner;
+    public EnemyController enemyController;
 
     private void Awake()
     {
@@ -15,7 +15,8 @@ public class GameManager : MonoBehaviour
 
     private void OnEnable()
     {
-        enemySpawner.OnEnemyDeath += levelManager.AddExperience;
+        enemyController.OnEnemyDeath += levelManager.AddExperience;
+        enemyController.OnBossDefeated += levelManager.LevelUp;
     }
     
 }

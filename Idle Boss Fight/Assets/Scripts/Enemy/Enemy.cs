@@ -30,7 +30,7 @@ public class Enemy : MonoBehaviour
         enemyUI.UpdateHealthBarUI(Health);
     }
 
-    public void EnemyDeath()
+    protected virtual void EnemyDeath()
     {
         OnEnemyDeath?.Invoke();
         Destroy(this.gameObject);

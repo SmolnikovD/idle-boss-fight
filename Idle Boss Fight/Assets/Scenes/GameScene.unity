@@ -132,9 +132,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 140825362}
+  - component: {fileID: 140825364}
   - component: {fileID: 140825361}
+  - component: {fileID: 140825363}
   m_Layer: 0
-  m_Name: EnemySpawner
+  m_Name: EnemyController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -154,7 +156,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyPrefab: {fileID: 1486185049882950471, guid: 38dc02c7b20a5314ba3188770f650af0, type: 3}
   bossPrefab: {fileID: 6656875148245423735, guid: 63dba3de6f37da645b548475eaefd56f, type: 3}
-  spawnedEnemy: {fileID: 0}
 --- !u!4 &140825362
 Transform:
   m_ObjectHideFlags: 0
@@ -169,6 +170,33 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &140825363
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 140825360}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44900ce11f6e0814b90a6a4cde4e5057, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timer: 3
+--- !u!114 &140825364
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 140825360}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbaba6287d3ebf14a850063fe5529f90, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawner: {fileID: 140825361}
+  bossFight: {fileID: 140825363}
 --- !u!1 &283654594
 GameObject:
   m_ObjectHideFlags: 0
@@ -215,7 +243,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 518859567}
   levelManager: {fileID: 283654597}
-  enemySpawner: {fileID: 140825361}
+  enemyController: {fileID: 140825364}
 --- !u!114 &283654597
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -530,7 +558,8 @@ MonoBehaviour:
   playerInput: {fileID: 0}
   playerAttack: {fileID: 0}
   playerData: {fileID: 0}
-  enemySpawner: {fileID: 140825361}
+  playerAnimation: {fileID: 0}
+  enemyController: {fileID: 140825364}
   enemyTarget: {fileID: 0}
 --- !u!114 &518859568
 MonoBehaviour:
@@ -1414,8 +1443,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 140825361}
-        m_TargetAssemblyTypeName: EnemySpawner, Assembly-CSharp
+      - m_Target: {fileID: 140825364}
+        m_TargetAssemblyTypeName: EnemyController, Assembly-CSharp
         m_MethodName: PrepareBossFight
         m_Mode: 1
         m_Arguments:

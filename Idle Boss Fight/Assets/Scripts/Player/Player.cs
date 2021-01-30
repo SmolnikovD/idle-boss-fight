@@ -4,24 +4,32 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {   
+    [HideInInspector]
     public PlayerInput playerInput;
+    [HideInInspector]
     public PlayerAttack playerAttack;
+    [HideInInspector]
     public PlayerData playerData;
+    [HideInInspector]
+    public PlayerAnimation playerAnimation;
 
-    public EnemySpawner enemySpawner;
+    public EnemyController enemyController;
+    //[HideInInspector]
     public Enemy enemyTarget;
 
     private void Awake()
     {
+        enemyController.OnEnemySpawned += OnEnemySpawned;
+
         playerInput = GetComponent<PlayerInput>();
         playerAttack = GetComponent<PlayerAttack>();
         playerData = GetComponent<PlayerData>();
+        playerAnimation = GetComponent<PlayerAnimation>();
     }
 
     private void OnEnable()
     {
         playerInput.OnPlayerInputPressed += playerAttack.OnPlayerInput;
-        enemySpawner.OnEnemySpawned += OnEnemySpawned;
     }
 
     private void OnEnemySpawned(GameObject enemyGameObject)

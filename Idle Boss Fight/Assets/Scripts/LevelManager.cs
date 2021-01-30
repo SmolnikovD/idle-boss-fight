@@ -15,12 +15,10 @@ public class LevelManager : MonoBehaviour
 
     public void AddExperience()
     {
+        if (currentExp >= expToLevelUp) return;
+
         currentExp++;
         levelProgressBar.value = (float)currentExp / expToLevelUp;
-        if (currentExp >= expToLevelUp)
-        {
-            LevelUp();
-        }
     }
 
     public void LevelUp()
