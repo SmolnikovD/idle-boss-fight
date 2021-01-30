@@ -17,7 +17,7 @@ public class Enemy : MonoBehaviour
     protected virtual void Start()
     {
         Health = maxHealth;
-        enemyUI.InitializeEnemyUI("Enemy", maxHealth);
+        enemyUI.InitializeEnemyUI(maxHealth);
     }
 
     public void GetDamage(int damage)

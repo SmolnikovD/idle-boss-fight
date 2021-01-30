@@ -14,7 +14,6 @@ public class Player : MonoBehaviour
     public PlayerAnimation playerAnimation;
 
     public EnemyController enemyController;
-    //[HideInInspector]
     public Enemy enemyTarget;
 
     private void Awake()

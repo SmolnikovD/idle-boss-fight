@@ -10,7 +10,7 @@ public class Boss : Enemy
     protected override void Start()
     {
         Health = maxHealth;
-        enemyUI.InitializeEnemyUI("Boss", maxHealth);
+        enemyUI.InitializeEnemyUI(maxHealth);
     }
 
     protected override void EnemyDeath()

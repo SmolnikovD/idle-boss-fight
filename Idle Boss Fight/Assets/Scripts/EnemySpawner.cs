@@ -44,7 +44,6 @@ public class EnemySpawner : MonoBehaviour
         spawnedEnemy = Instantiate(enemyPrefab, transform.position, Quaternion.identity);
         spawnedEnemy.GetComponent<Enemy>().OnEnemyDeath += OnEnemyDeathCallback;
         OnEnemySpawned?.Invoke(spawnedEnemy);
-        Debug.Log("spawner");
     }
 
     private void SpawnBoss()

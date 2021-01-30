@@ -13,13 +13,11 @@ public class BossFight : MonoBehaviour
     public void StartBossFightTimer()
     {
         StartCoroutine(BossFightTimerCoroutine());
-        Debug.Log("TimeStarted");
     }
 
     private IEnumerator BossFightTimerCoroutine()
     {
         yield return new WaitForSeconds(timer);
         OnBossFightTimerEnded?.Invoke();
-        Debug.Log("TimeEnded");
     }
 }
