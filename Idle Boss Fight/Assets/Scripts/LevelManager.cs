@@ -11,18 +11,23 @@ public class LevelManager : MonoBehaviour
     public TextMeshProUGUI levelText;
     public Slider levelProgressBar;
 
-    public int Level { get; set; } = 1;
+    private static int level = 1;
+    public static int Level
+    {
+        get { return level; }
+    }
+    public static int CurrentLevel { get; private set; }
     private int currentExp = 0;
     private int expToLevelUp = 3;
 
-    public Action OnLevelUpReady;
+    public event Action OnLevelUpReady;
 
     public void AddExperience()
     {
         if (currentExp >= expToLevelUp) return;
 
         currentExp++;
-        levelProgressBar.value = (float) currentExp / expToLevelUp;
+        levelProgressBar.value = (float)currentExp / expToLevelUp;
 
         if (currentExp >= expToLevelUp)
             OnLevelUpReady?.Invoke();
@@ -30,14 +35,14 @@ public class LevelManager : MonoBehaviour
 
     public void LevelUp()
     {
-        Level++;
+        level++;
         expToLevelUp = Mathf.RoundToInt((float)expToLevelUp * 1.8f);
         LevelReset();
     }
 
     public void LevelDown()
     {
-        Level--;
+        level--;
         expToLevelUp = Mathf.RoundToInt((float)expToLevelUp / 1.8f);
         LevelReset();
     }

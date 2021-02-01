@@ -13,10 +13,10 @@ public class EnemyController : MonoBehaviour
     private ParticleSystem bossDissappearingVFX;
 
 
-    public Action<GameObject> OnEnemySpawned;
-    public Action OnEnemyDeath;
-    public Action OnBossFightTimerEnded;
-    public Action OnBossDefeated;
+    public event Action<GameObject> OnEnemySpawned;
+    public event Action OnEnemyDeath;
+    public event Action OnBossFightTimerEnded;
+    public event Action OnBossDefeated;
 
     private void Awake()
     {

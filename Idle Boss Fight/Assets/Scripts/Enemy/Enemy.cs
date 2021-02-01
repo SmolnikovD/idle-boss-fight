@@ -12,12 +12,12 @@ public class Enemy : MonoBehaviour
 
     public EnemyUI enemyUI;
 
-    public Action OnEnemyDeath;
+    public event Action OnEnemyDeath;
 
     protected virtual void Start()
     {
-        Health = maxHealth;
-        enemyUI.InitializeEnemyUI(maxHealth);
+        Health = maxHealth * LevelManager.Level;
+        enemyUI.InitializeEnemyUI(Health);
     }
 
     public void GetDamage(int damage)

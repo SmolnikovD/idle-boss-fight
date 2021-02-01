@@ -13,10 +13,10 @@ public class EnemySpawner : MonoBehaviour
     private GameObject spawnedEnemy;
     private Action SpawnEnemy;
 
-    public Action<GameObject> OnEnemySpawned;
-    public Action OnEnemyDeath;
-    public Action OnEnemyDefeated;
-    public Action OnBossDefeated;
+    public event Action<GameObject> OnEnemySpawned;
+    public event Action OnEnemyDeath;
+    public event Action OnEnemyDefeated;
+    public event Action OnBossDefeated;
 
     private void Awake()
     {

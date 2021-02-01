@@ -8,7 +8,7 @@ public class BossFight : MonoBehaviour
     [SerializeField]
     public float timer;
 
-    public Action OnBossFightTimerEnded;
+    public event Action OnBossFightTimerEnded;
 
     public void StartBossFightTimer(Boss boss)
     {

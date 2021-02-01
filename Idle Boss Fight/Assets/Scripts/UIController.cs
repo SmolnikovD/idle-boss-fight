@@ -9,7 +9,7 @@ public class UIController : MonoBehaviour
 {
     public Button fightBossButton;
 
-    public Action OnFightBossButtonPressed;
+    public event Action OnFightBossButtonPressed;
 
     private void Start()
     {

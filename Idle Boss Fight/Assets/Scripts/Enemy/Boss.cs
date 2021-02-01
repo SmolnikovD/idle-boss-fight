@@ -5,12 +5,12 @@ using UnityEngine;
 
 public class Boss : Enemy
 {
-    public Action OnBossDefeated;
+    public event Action OnBossDefeated;
 
     protected override void Start()
     {
-        Health = maxHealth;
-        enemyUI.InitializeEnemyUI(maxHealth);
+        Health = maxHealth * LevelManager.Level;
+        enemyUI.InitializeEnemyUI(Health);
     }
 
     protected override void EnemyDeath()
@@ -21,7 +21,7 @@ public class Boss : Enemy
 
     public void BossDissappeared()
     {
-        OnEnemyDeath?.Invoke(); // TODO Босс здесь не умирает, нужен другой ивент
-        Destroy(this.gameObject);
+        // TODO Нужен рефакторинг, не совпадают значения вызванных методов
+        base.EnemyDeath();
     }
 }
