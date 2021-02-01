@@ -18,7 +18,7 @@ public class BossFight : MonoBehaviour
     private IEnumerator BossFightTimerCoroutine(Boss boss)
     {
         yield return new WaitForSeconds(timer);
-        if (boss.Health > 0)
+        if (boss.GetHealth() > 0)
         {
             OnBossFightTimerEnded?.Invoke();
             boss.BossDissappeared();

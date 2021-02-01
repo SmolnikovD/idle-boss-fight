@@ -5,18 +5,15 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public Player player;
-    public LevelManager levelManager;
+    public LevelSystem levelManager;
     public EnemyController enemyController;
     public UIController uiController;
-
-    private void Awake()
-    {
-        levelManager = GetComponent<LevelManager>();
-    }
+    public CurrencySystem currencySystem;
 
     private void OnEnable()
     {
         enemyController.OnEnemyDeath += levelManager.AddExperience;
+        enemyController.OnEnemyDeath += () => currencySystem.AddCoins(enemyController.CurrentEnemy.GetComponent<Enemy>().coinsReward, LevelSystem.Level, () => uiController.UpdateCoinsUI(currencySystem.Coins)); // pzdc
         enemyController.OnBossDefeated += levelManager.LevelUp;
         enemyController.OnBossFightTimerEnded += levelManager.LevelDown;
         uiController.OnFightBossButtonPressed += enemyController.PrepareBossFight;

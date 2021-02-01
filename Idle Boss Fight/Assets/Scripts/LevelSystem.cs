@@ -6,17 +6,13 @@ using UnityEngine;
 using UnityEngine.UI;
 
 //TODO Вынести логику UI
-public class LevelManager : MonoBehaviour
+public class LevelSystem : MonoBehaviour
 {
     public TextMeshProUGUI levelText;
     public Slider levelProgressBar;
 
-    private static int level = 1;
-    public static int Level
-    {
-        get { return level; }
-    }
-    public static int CurrentLevel { get; private set; }
+    public static int Level { get; private set; } = 1;
+
     private int currentExp = 0;
     private int expToLevelUp = 3;
 
@@ -35,14 +31,14 @@ public class LevelManager : MonoBehaviour
 
     public void LevelUp()
     {
-        level++;
+        Level++;
         expToLevelUp = Mathf.RoundToInt((float)expToLevelUp * 1.8f);
         LevelReset();
     }
 
     public void LevelDown()
     {
-        level--;
+        Level--;
         expToLevelUp = Mathf.RoundToInt((float)expToLevelUp / 1.8f);
         LevelReset();
     }

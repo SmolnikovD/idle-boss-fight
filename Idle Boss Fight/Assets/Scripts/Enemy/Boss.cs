@@ -5,11 +5,11 @@ using UnityEngine;
 
 public class Boss : Enemy
 {
-    public event Action OnBossDefeated;
+    public event Action OnBossDefeated;   
 
     protected override void Start()
     {
-        Health = maxHealth * LevelManager.Level;
+        Health = maxHealth * LevelSystem.Level;
         enemyUI.InitializeEnemyUI(Health);
     }
 

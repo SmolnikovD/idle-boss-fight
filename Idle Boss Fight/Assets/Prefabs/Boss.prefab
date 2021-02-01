@@ -716,6 +716,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 50
   <Health>k__BackingField: 0
+  coinsReward: 5
   enemyUI: {fileID: 7033480409125050604}
 --- !u!1 &8002588600265228395
 GameObject:

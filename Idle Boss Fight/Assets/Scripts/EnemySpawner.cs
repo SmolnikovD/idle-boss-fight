@@ -15,9 +15,8 @@ public class EnemySpawner : MonoBehaviour
 
     public event Action<GameObject> OnEnemySpawned;
     public event Action OnEnemyDeath;
-    public event Action OnEnemyDefeated;
     public event Action OnBossDefeated;
-
+    
     private void Awake()
     {
         SpawnEnemy = SpawnRegularEnemy;

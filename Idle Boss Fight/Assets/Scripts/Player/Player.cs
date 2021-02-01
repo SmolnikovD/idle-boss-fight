@@ -31,6 +31,8 @@ public class Player : MonoBehaviour
         playerInput.OnPlayerInputPressed += playerAttack.OnPlayerInput;
     }
 
+
+
     private void OnEnemySpawned(GameObject enemyGameObject)
     {
         enemyTarget = enemyGameObject.GetComponent<Enemy>();

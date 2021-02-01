@@ -8,7 +8,10 @@ public class Enemy : MonoBehaviour
     [SerializeField]
     protected int maxHealth;
     [field: SerializeField]
-    public int Health { get; set; }
+    protected int Health { get; set; }
+
+    [SerializeField]
+    public int coinsReward = 1;
 
     public EnemyUI enemyUI;
 
@@ -16,7 +19,7 @@ public class Enemy : MonoBehaviour
 
     protected virtual void Start()
     {
-        Health = maxHealth * LevelManager.Level;
+        Health = maxHealth * LevelSystem.Level;
         enemyUI.InitializeEnemyUI(Health);
     }
 
@@ -34,5 +37,10 @@ public class Enemy : MonoBehaviour
     {
         OnEnemyDeath?.Invoke();
         Destroy(this.gameObject);
+    }
+
+    public int GetHealth()
+    {
+        return Health;
     }
 }

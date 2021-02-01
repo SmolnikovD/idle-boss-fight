@@ -8,6 +8,7 @@ using System;
 public class UIController : MonoBehaviour
 {
     public Button fightBossButton;
+    public TextMeshProUGUI coinsText;
 
     public event Action OnFightBossButtonPressed;
 
@@ -22,4 +23,9 @@ public class UIController : MonoBehaviour
     }
 
     public void OnFightBossButtonPressedCallback() => OnFightBossButtonPressed.Invoke();
+
+    public void UpdateCoinsUI(int amount)
+    {
+        coinsText.SetText(amount.ToString());
+    }
 }
