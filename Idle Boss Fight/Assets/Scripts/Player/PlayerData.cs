@@ -5,7 +5,9 @@ using UnityEngine;
 public class PlayerData : MonoBehaviour
 {
     [field: SerializeField]
-    public int Damage { get; set; } = 1;
+    public int AttackPower { get; set; } = 1;
+    [field: SerializeField]
+    public int ClickPower { get; set; } = 1;
     [field: SerializeField]
     public float AttackRate { get; set; } = 1f;
 }

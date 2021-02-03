@@ -5,12 +5,14 @@ using UnityEngine;
 public class ShopUI : MonoBehaviour
 {
     [SerializeField]
-    Animator animator;
+    private GameObject shopGameObject;
+    private Animator animator;
 
     private bool isOpened = false;
 
     private void Awake()
     {
+        animator = shopGameObject.GetComponent<Animator>();
         CloseShop();
     }
 

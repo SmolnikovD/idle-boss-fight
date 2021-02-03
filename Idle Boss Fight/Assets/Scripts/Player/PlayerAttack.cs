@@ -1,14 +1,17 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerAttack : MonoBehaviour
 {
-    private Player player;
+    [SerializeField]
+    private PlayerData playerData;
+    public static event Action<int> OnPlayerAttack;
 
     private void Awake()
     {
-        player = GetComponent<Player>();
+        PlayerInput.OnPlayerInputPressed += OnPlayerInput;
     }
 
     private void Start()
@@ -16,22 +19,22 @@ public class PlayerAttack : MonoBehaviour
         StartCoroutine(IdleAttack());
     }
 
-    public void Attack()
+    public void Attack(int damage)
     {
-        player.enemyTarget.GetDamage(player.playerData.Damage);
+        OnPlayerAttack?.Invoke(damage);
     }
 
     private IEnumerator IdleAttack()
     {
         while (true)
         {
-            yield return new WaitForSeconds(player.playerData.AttackRate);
-            Attack();
+            yield return new WaitForSeconds(playerData.AttackRate);
+            Attack(playerData.ClickPower);
         }
     }
 
     public void OnPlayerInput()
     {
-        Attack();
+        Attack(playerData.AttackPower);
     }
 }

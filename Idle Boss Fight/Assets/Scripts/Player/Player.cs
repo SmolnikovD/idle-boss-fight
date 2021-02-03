@@ -5,12 +5,6 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {   
     [HideInInspector]
-    public PlayerInput playerInput;
-    [HideInInspector]
-    public PlayerAttack playerAttack;
-    [HideInInspector]
-    public PlayerData playerData;
-    [HideInInspector]
     public PlayerAnimation playerAnimation;
 
     public EnemyController enemyController;
@@ -18,20 +12,9 @@ public class Player : MonoBehaviour
 
     private void Awake()
     {
-        enemyController.OnEnemySpawned += OnEnemySpawned;
-
-        playerInput = GetComponent<PlayerInput>();
-        playerAttack = GetComponent<PlayerAttack>();
-        playerData = GetComponent<PlayerData>();
+        EnemySpawner.OnEnemySpawned += OnEnemySpawned;
         playerAnimation = GetComponent<PlayerAnimation>();
     }
-
-    private void OnEnable()
-    {
-        playerInput.OnPlayerInputPressed += playerAttack.OnPlayerInput;
-    }
-
-
 
     private void OnEnemySpawned(GameObject enemyGameObject)
     {

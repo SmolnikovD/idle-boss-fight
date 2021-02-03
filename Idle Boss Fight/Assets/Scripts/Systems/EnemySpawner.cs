@@ -13,9 +13,9 @@ public class EnemySpawner : MonoBehaviour
     private GameObject spawnedEnemy;
     private Action SpawnEnemy;
 
-    public event Action<GameObject> OnEnemySpawned;
-    public event Action OnEnemyDeath;
-    public event Action OnBossDefeated;
+    public static event Action<GameObject> OnEnemySpawned;
+    public static event Action<GameObject> OnEnemyDeath;
+    public static event Action OnBossDefeated;
     
     private void Awake()
     {
@@ -34,7 +34,7 @@ public class EnemySpawner : MonoBehaviour
 
     private void OnEnemyDeathCallback()
     {
-        OnEnemyDeath?.Invoke();
+        OnEnemyDeath?.Invoke(spawnedEnemy);
         SpawnEnemy();
     }
 

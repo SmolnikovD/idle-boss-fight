@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class PlayerInput : MonoBehaviour
 {
-    public event Action OnPlayerInputPressed;
+    public static event Action OnPlayerInputPressed;
 
     private void Update()
     {

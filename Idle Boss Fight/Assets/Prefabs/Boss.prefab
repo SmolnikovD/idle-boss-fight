@@ -714,7 +714,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8ebfde429adb7340b60ece2cef8ccef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 50
+  maxHealth: 100
   <Health>k__BackingField: 0
   coinsReward: 5
   enemyUI: {fileID: 7033480409125050604}

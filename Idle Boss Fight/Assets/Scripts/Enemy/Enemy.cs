@@ -10,12 +10,18 @@ public class Enemy : MonoBehaviour
     [field: SerializeField]
     protected int Health { get; set; }
 
-    [SerializeField]
-    public int coinsReward = 1;
+    //TODO Debug
+    [HideInInspector]
+    public int coinsReward = 10;
 
     public EnemyUI enemyUI;
 
     public event Action OnEnemyDeath;
+
+    private void Awake()
+    {
+        PlayerAttack.OnPlayerAttack += GetDamage;
+    }
 
     protected virtual void Start()
     {
@@ -42,5 +48,10 @@ public class Enemy : MonoBehaviour
     public int GetHealth()
     {
         return Health;
+    }
+
+    public void OnDestroy()
+    {
+        PlayerAttack.OnPlayerAttack -= GetDamage;
     }
 }
