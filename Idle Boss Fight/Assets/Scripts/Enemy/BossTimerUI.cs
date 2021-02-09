@@ -5,16 +5,21 @@ using UnityEngine.UI;
 
 public class BossTimerUI : MonoBehaviour
 {
-    public float BossTime { get; set; }
-    private float currentTime;
-
+    [SerializeField]
     private Slider timerSlider;
+
+    private float totalTime;
+    private float currentTime;
 
     private void Start()
     {
-        timerSlider = GetComponent<Slider>();
         timerSlider.value = 1f;
-        currentTime = BossTime;
+        currentTime = totalTime;
+    }
+
+    public void SetTotalTime(float totalTime)
+    {
+        this.totalTime = totalTime;
     }
 
     void Update()
@@ -25,6 +30,6 @@ public class BossTimerUI : MonoBehaviour
     private void CalculateBossTimer()
     {
         currentTime -= Time.deltaTime;
-        timerSlider.value = currentTime / BossTime;
+        timerSlider.value = currentTime / totalTime;
     }
 }

@@ -27,5 +27,4 @@ public class LevelUI : MonoBehaviour
     {
         levelProgressBar.value = levelPercent;
     }
-
 }

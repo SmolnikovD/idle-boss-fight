@@ -5,23 +5,35 @@ using UnityEngine;
 
 public class Boss : Enemy
 {
-    public event Action OnBossDefeated;   
+    [SerializeField]
+    private BossFightTimer bossFight;
+    [SerializeField]
+    private ParticleSystem bossDeathVFX;
+
+    public event Action OnBossDefeated;
+    public event Action OnBossDissapeared;
 
     protected override void Start()
     {
         Health = maxHealth * LevelSystem.Level;
         enemyUI.InitializeEnemyUI(Health);
+        bossFight.StartBossFightTimer(OnTimerEnd);
     }
 
     protected override void EnemyDeath()
     {
         OnBossDefeated?.Invoke();
+        Instantiate(bossDeathVFX);
         base.EnemyDeath();
     }
 
-    public void BossDissappeared()
+    private void OnTimerEnd()
     {
-        // TODO Нужен рефакторинг, не совпадают значения вызванных методов
-        base.EnemyDeath();
+        if(Health >= 0)
+        {
+            OnBossDissapeared?.Invoke();
+            Instantiate(bossDeathVFX);
+            base.EnemyDeath();
+        }
     }
 }

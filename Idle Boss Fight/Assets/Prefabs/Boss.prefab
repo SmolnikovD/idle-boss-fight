@@ -345,7 +345,7 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0.555
+  m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -529,7 +529,6 @@ GameObject:
   m_Component:
   - component: {fileID: 8469400380369096788}
   - component: {fileID: 2646767068634281035}
-  - component: {fileID: 1028474209953962420}
   m_Layer: 5
   m_Name: TimerSlider
   m_TagString: Untagged
@@ -603,22 +602,10 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0.838
+  m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &1028474209953962420
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4232916380962445107}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6e03d1b52addfbb43af23d22a06bcb9f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &4631938881691534176
 GameObject:
   m_ObjectHideFlags: 0
@@ -679,6 +666,8 @@ GameObject:
   m_Component:
   - component: {fileID: 6656875148245423728}
   - component: {fileID: 9099581345500120992}
+  - component: {fileID: 1558456998}
+  - component: {fileID: 2119105007968738637}
   m_Layer: 0
   m_Name: Boss
   m_TagString: Untagged
@@ -718,6 +707,35 @@ MonoBehaviour:
   <Health>k__BackingField: 0
   coinsReward: 5
   enemyUI: {fileID: 7033480409125050604}
+  bossFight: {fileID: 1558456998}
+  bossDeathVFX: {fileID: 3874927239112005658, guid: 92ca91e58c6f5624c9579f235ce96a9b, type: 3}
+--- !u!114 &1558456998
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6656875148245423735}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8ab5125241273044a84d425b36081b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  time: 10
+  timerUI: {fileID: 2119105007968738637}
+--- !u!114 &2119105007968738637
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6656875148245423735}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e03d1b52addfbb43af23d22a06bcb9f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timerSlider: {fileID: 2646767068634281035}
 --- !u!1 &8002588600265228395
 GameObject:
   m_ObjectHideFlags: 0

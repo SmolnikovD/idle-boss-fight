@@ -10,4 +10,5 @@ public class PlayerData : MonoBehaviour
     public int ClickPower { get; set; } = 1;
     [field: SerializeField]
     public float AttackRate { get; set; } = 1f;
+
 }

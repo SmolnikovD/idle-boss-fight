@@ -9,7 +9,9 @@ public class LevelSystem : MonoBehaviour
 {
     public static int Level { get; private set; } = 1;
 
+    [SerializeField]
     private int currentExp = 0;
+    [SerializeField]
     private int expToLevelUp = 3;
     private float levelProgressionMultiplier = 2.5f;
 
@@ -20,7 +22,7 @@ public class LevelSystem : MonoBehaviour
     private void Awake()
     {
         EnemySpawner.OnEnemyDeath += (go) => AddExperience();
-        BossFight.OnBossFightTimerEnded += LevelDown;
+        EnemySpawner.OnBossDissapeared += LevelDown;
         EnemySpawner.OnBossDefeated += LevelUp;
     }
 
@@ -45,10 +47,14 @@ public class LevelSystem : MonoBehaviour
 
     public void LevelDown()
     {
-        Level--;
-        expToLevelUp = Mathf.RoundToInt((float)expToLevelUp / levelProgressionMultiplier);
+        if(Level > 1)
+        {
+            Level--;
+            expToLevelUp = Mathf.RoundToInt((float)expToLevelUp / levelProgressionMultiplier);
+        }
+
         currentExp = 0;
         OnLevelChanged?.Invoke(Level);
+        OnExperienceChanged?.Invoke(0f);
     }
-
 }

@@ -5,7 +5,6 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-// TODO Вынести UI
 public class UpgradeSystem : MonoBehaviour
 {
     [SerializeField]
@@ -13,48 +12,54 @@ public class UpgradeSystem : MonoBehaviour
     [SerializeField]
     private CurrencySystem currencySystem;
     [SerializeField]
-    private ShopData shopData;
+    private ShopUpgradeButtonsUI shopUpgradeButtonsUI;
+    [SerializeField]
+    private SkillController skillController;
 
-    [Header("Stats Buttons")]
-    public Button statsAttackPowerButton;
-    public Button statsClickPowerButton;
-    public Button statsAttackRateButton;
-    [Header("Skill Buttons")]
-    public Button skillAttackPowerButton;
-    public Button skillClickPowerButton;
-    public Button skillAttackRateButton;
+    private readonly ShopData shopData = new ShopData();
 
     public static event Action OnUpgrade;
 
     private void Awake()
     {
-        statsAttackPowerButton.onClick.AddListener(() => ProccessButtonClick(statsAttackPowerButton, UpgradeType.StatsAttackPower));
-        statsClickPowerButton.onClick.AddListener(() => ProccessButtonClick(statsClickPowerButton, UpgradeType.StatsClickPower));
-        statsAttackRateButton.onClick.AddListener(() => ProccessButtonClick(statsAttackRateButton, UpgradeType.StatsAttackRate));
-
-        skillAttackPowerButton.onClick.AddListener(() => ProccessButtonClick(skillAttackPowerButton, UpgradeType.SkillAttackPower));
-        skillClickPowerButton.onClick.AddListener(() => ProccessButtonClick(skillClickPowerButton, UpgradeType.SkillClickPower));
-        skillAttackRateButton.onClick.AddListener(() => ProccessButtonClick(skillAttackRateButton, UpgradeType.SkillAttackRate));
+        shopUpgradeButtonsUI.OnStatsUpgradeButtonClick += ProccessStatsUpgrade;
+        shopUpgradeButtonsUI.OnSkillsUpgradeButtonClick += ProcessSkillUpgrade;
     }
 
-    public void UpdateText(Button button, int newPrice)
+    private void ProccessStatsUpgrade(Button button, UpgradeType upgradeType)
     {
-        button.gameObject.GetComponentInChildren<TextMeshProUGUI>().SetText(newPrice.ToString());
-    }
-
-    private void ProccessButtonClick(Button button, UpgradeType upgradeType)
-    {
-        if (currencySystem.Coins >= shopData.GetCost(upgradeType))
+        if (TryUpgrade(upgradeType))
         {
-            currencySystem.SpendCoins(shopData.GetCost(upgradeType));
-            shopData.UpdateCost(upgradeType);
-            UpdatePlayerStats(upgradeType);
-            UpdateText(button, shopData.GetCost(upgradeType));
+            shopUpgradeButtonsUI.UpdateText(button, shopData.GetCost(upgradeType));
+            UpgradeStats(upgradeType);
+
             OnUpgrade?.Invoke();
         }
     }
 
-    private void UpdatePlayerStats(UpgradeType upgradeType)
+    private void ProcessSkillUpgrade(Button button, UpgradeType upgradeType)
+    {
+        if (TryUpgrade(upgradeType))
+        {
+            shopUpgradeButtonsUI.UpdateText(button, shopData.GetCost(upgradeType));
+            skillController.TryUpgrade(upgradeType);
+
+            OnUpgrade?.Invoke();
+        }
+    }
+
+    private bool TryUpgrade(UpgradeType upgradeType)
+    {
+        if (currencySystem.Coins >= shopData.GetCost(upgradeType))
+        {
+            currencySystem.SpendCoins(shopData.GetCost(upgradeType));
+            shopData.IncreaseCost(upgradeType);
+            return true;
+        }
+        return false;
+    }
+
+    private void UpgradeStats(UpgradeType upgradeType)
     {
         switch (upgradeType)
         {

@@ -12,12 +12,7 @@ public class CurrencySystem : MonoBehaviour
 
     private void Awake()
     {
-        EnemySpawner.OnEnemyDeath += (enemy) => AddCoins(enemy.GetComponent<Enemy>().coinsReward, LevelSystem.Level);
-    }
-    public void AddCoins(int amount)
-    {
-        Coins += amount;
-        OnCoinsAmountChanged?.Invoke(Coins);
+        EnemySpawner.OnEnemyDeath += (enemy) => AddCoins(enemy.GetComponent<Enemy>().CoinsReward, LevelSystem.Level);
     }
 
     public void AddCoins(int amount, int multiplier)

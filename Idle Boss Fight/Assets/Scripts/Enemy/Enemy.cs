@@ -8,15 +8,14 @@ public class Enemy : MonoBehaviour
     [SerializeField]
     protected int maxHealth;
     [field: SerializeField]
-    protected int Health { get; set; }
+    public int Health { get; protected set; }
 
-    //TODO Debug
-    [HideInInspector]
-    public int coinsReward = 10;
+    [field: SerializeField]
+    public int CoinsReward { get; protected set; } = 10;
 
     public EnemyUI enemyUI;
 
-    public event Action OnEnemyDeath;
+    public event Action<GameObject> OnEnemyDeath;
 
     private void Awake()
     {
@@ -41,13 +40,8 @@ public class Enemy : MonoBehaviour
 
     protected virtual void EnemyDeath()
     {
-        OnEnemyDeath?.Invoke();
+        OnEnemyDeath?.Invoke(this.gameObject);
         Destroy(this.gameObject);
-    }
-
-    public int GetHealth()
-    {
-        return Health;
     }
 
     public void OnDestroy()

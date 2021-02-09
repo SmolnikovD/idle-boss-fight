@@ -3,10 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ShopData : MonoBehaviour
+public class ShopData
 {
-    public event Action OnCostUpdated;
-
     private readonly Dictionary<UpgradeType, List<int>> costDictionary = new Dictionary<UpgradeType, List<int>>()
     {
         {UpgradeType.StatsAttackPower, new List<int>{ 10, 10 * LevelSystem.Level } },
@@ -22,8 +20,7 @@ public class ShopData : MonoBehaviour
         return costDictionary[upgradeType][0];
     }
 
-    // TODO Подумать по поводу подхода без свитча
-    public void UpdateCost(UpgradeType upgradeType)
+    public void IncreaseCost(UpgradeType upgradeType)
     {
         switch (upgradeType)
         {
@@ -39,8 +36,6 @@ public class ShopData : MonoBehaviour
                 break;
             default: break;
         }
-
-        OnCostUpdated?.Invoke();
     }
 }
 

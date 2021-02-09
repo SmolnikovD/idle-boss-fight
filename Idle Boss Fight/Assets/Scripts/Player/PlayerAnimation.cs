@@ -10,10 +10,10 @@ public class PlayerAnimation : MonoBehaviour
 
     Action SetRandomAnimation;
 
-    private string Attack1 = "Attack1";
-    private string Attack2 = "Attack2";
-    private string Idle = "Idle";
-    private string Dizzy = "Dizzy";
+    private const string Attack1 = "Attack1";
+    private const string Attack2 = "Attack2";
+    private const string Idle = "Idle";
+    private const string Dizzy = "Dizzy";
 
     private void Start()
     {
