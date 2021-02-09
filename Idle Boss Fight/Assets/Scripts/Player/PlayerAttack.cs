@@ -29,12 +29,12 @@ public class PlayerAttack : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(playerData.AttackRate);
-            Attack(playerData.ClickPower);
+            Attack((int)playerData.ClickPower);
         }
     }
 
     public void OnPlayerInput()
     {
-        Attack(playerData.AttackPower);
+        Attack((int)playerData.AttackPower);
     }
 }

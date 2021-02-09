@@ -8,13 +8,13 @@ using UnityEngine.UI;
 public class UpgradeSystem : MonoBehaviour
 {
     [SerializeField]
-    private PlayerData playerData;
+    private PlayerDataController playerDataController;
+    [SerializeField]
+    private SkillController skillController;
     [SerializeField]
     private CurrencySystem currencySystem;
     [SerializeField]
     private ShopUpgradeButtonsUI shopUpgradeButtonsUI;
-    [SerializeField]
-    private SkillController skillController;
 
     private readonly ShopData shopData = new ShopData();
 
@@ -22,27 +22,16 @@ public class UpgradeSystem : MonoBehaviour
 
     private void Awake()
     {
-        shopUpgradeButtonsUI.OnStatsUpgradeButtonClick += ProccessStatsUpgrade;
-        shopUpgradeButtonsUI.OnSkillsUpgradeButtonClick += ProcessSkillUpgrade;
+        shopUpgradeButtonsUI.OnStatsUpgradeButtonClick += (button, upgradeType) => ProccessUpgrade(button, upgradeType, (type) => playerDataController.UpgradeStats(type));
+        shopUpgradeButtonsUI.OnSkillsUpgradeButtonClick += (button, upgradeType) => ProccessUpgrade(button, upgradeType, (type) => skillController.TryUpgrade(type));
     }
 
-    private void ProccessStatsUpgrade(Button button, UpgradeType upgradeType)
+    private void ProccessUpgrade(Button button, UpgradeType upgradeType, Action<UpgradeType> performUpgradeAction)
     {
         if (TryUpgrade(upgradeType))
         {
             shopUpgradeButtonsUI.UpdateText(button, shopData.GetCost(upgradeType));
-            UpgradeStats(upgradeType);
-
-            OnUpgrade?.Invoke();
-        }
-    }
-
-    private void ProcessSkillUpgrade(Button button, UpgradeType upgradeType)
-    {
-        if (TryUpgrade(upgradeType))
-        {
-            shopUpgradeButtonsUI.UpdateText(button, shopData.GetCost(upgradeType));
-            skillController.TryUpgrade(upgradeType);
+            performUpgradeAction(upgradeType);
 
             OnUpgrade?.Invoke();
         }
@@ -57,21 +46,5 @@ public class UpgradeSystem : MonoBehaviour
             return true;
         }
         return false;
-    }
-
-    private void UpgradeStats(UpgradeType upgradeType)
-    {
-        switch (upgradeType)
-        {
-            case UpgradeType.StatsAttackPower:
-                playerData.AttackPower += 1;
-                break;
-            case UpgradeType.StatsClickPower:
-                playerData.ClickPower += 1;
-                break;
-            case UpgradeType.StatsAttackRate:
-                playerData.AttackRate *= 0.8f;
-                break;
-        }
     }
 }
