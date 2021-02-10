@@ -4,37 +4,40 @@ using UnityEngine;
 
 public class SkillController : MonoBehaviour
 {
-    private readonly Dictionary<UpgradeType, Skill> skillsDictionary = new Dictionary<UpgradeType, Skill>
+    [SerializeField]
+    private PlayerDataController playerDataController;
+    [SerializeField]
+    private SkillButtonsUI skillButtonsUI;
+
+    [SerializeField]
+    private AttackPowerSkill attackPowerSkill;
+    [SerializeField]
+    private ClickPowerSkill clickPowerSkill;
+    [SerializeField]
+    private AttackRateSkill attackRateSkill;
+
+    private Dictionary<UpgradeType, Skill> skillsDictionary = new Dictionary<UpgradeType, Skill>();
+
+    private void Awake()
     {
-        { UpgradeType.SkillAttackPower, new AttackPowerSkill(1f,3f) },
-        /////////////// skill2
-        /////////////// skill3 
-    };
+        skillsDictionary.Add(UpgradeType.SkillAttackPower, attackPowerSkill);
+        skillsDictionary.Add(UpgradeType.SkillClickPower, clickPowerSkill);
+        skillsDictionary.Add(UpgradeType.SkillAttackRate, attackRateSkill);
+
+        skillButtonsUI.OnSkillAttackPowerButtonClicked += () => attackPowerSkill.Perform(playerDataController);
+        skillButtonsUI.OnSkillClickPowerButtonClicked += () => clickPowerSkill.Perform(playerDataController);
+        skillButtonsUI.OnSkillClickRateButtonClicked += () => attackRateSkill.Perform(playerDataController);
+    }
 
     public void TryUpgrade(UpgradeType upgradeType)
     {
-        if (CheckIfSkillUnlocked(upgradeType))
+        if (skillsDictionary[upgradeType].IsUnlocked)
         {
-            UpgradeSkill(upgradeType);
+            skillsDictionary[upgradeType].Upgrade();
         }
         else
         {
-            UnlockSkill(upgradeType);
+            skillsDictionary[upgradeType].Unlock();
         }
-    }
-
-    private bool CheckIfSkillUnlocked(UpgradeType upgradeType)
-    {
-        return skillsDictionary[upgradeType].IsUnlocked;
-    }
-
-    private void UnlockSkill(UpgradeType upgradeType)
-    {
-        skillsDictionary[upgradeType].IsUnlocked = true;
-    }
-
-    private void UpgradeSkill(UpgradeType upgradeType)
-    {
-        skillsDictionary[upgradeType].Upgrade();
     }
 }

@@ -6,7 +6,7 @@ using UnityEngine;
 public class StatsPanelUI : MonoBehaviour
 {
     [SerializeField]
-    private PlayerData playerData;
+    private PlayerDataController playerDataController;
 
     [SerializeField]
     private TextMeshProUGUI coinsText;
@@ -25,9 +25,9 @@ public class StatsPanelUI : MonoBehaviour
 
     public void UpdateStatsPanelUI()
     {
-        attackPowerText.SetText(playerData.AttackPower.ToString());
-        clickPowerText.SetText(playerData.ClickPower.ToString());
-        attackRateText.SetText(playerData.AttackRate.ToString());
+        attackPowerText.SetText(playerDataController.GetStat(UpgradeType.StatsAttackPower).ToString());
+        clickPowerText.SetText(playerDataController.GetStat(UpgradeType.StatsClickPower).ToString());
+        attackRateText.SetText(playerDataController.GetStat(UpgradeType.StatsAttackRate).ToString());
     }
 
     public void UpdateCoinsUI(int amount)

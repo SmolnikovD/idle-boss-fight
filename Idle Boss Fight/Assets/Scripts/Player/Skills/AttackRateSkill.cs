@@ -2,18 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AttackPowerSkill : Skill
+public class AttackRateSkill : Skill
 {
     public override void Perform(PlayerDataController playerDataController)
     {
-        float attackPowerToModify = playerDataController.GetStat(UpgradeType.StatsAttackPower);
-        playerDataController.ModifiedAttackPower = () => { return attackPowerToModify * Multiplier; };
+        float attackRateToModify = playerDataController.GetStat(UpgradeType.StatsAttackRate);
+        playerDataController.ModifiedAttackRate = () => { return attackRateToModify * Multiplier; };
         StartCoroutine(SkillDurationCoroutine(playerDataController));
     }
 
     protected override IEnumerator SkillDurationCoroutine(PlayerDataController playerDataController)
     {
         yield return new WaitForSeconds(Duration);
-        playerDataController.ModifiedAttackPower = null;
+        playerDataController.ModifiedAttackRate = null;
     }
 }

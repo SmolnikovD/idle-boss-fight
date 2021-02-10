@@ -3,46 +3,59 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-//TODO Убрать дебаг
 public class PlayerDataController : MonoBehaviour
 {
     [SerializeField]
     private PlayerData playerData;
 
-    private Dictionary<UpgradeType, Func<float>> playerDataDictionary = new Dictionary<UpgradeType, Func<float>>();
+    public Func<float> ModifiedAttackPower;
+    public Func<float> ModifiedClickPower;
+    public Func<float> ModifiedAttackRate;
+
+    ////debug
+    //public float modifiedAttackPower;
+    //public float modifiedClickPower;
+    //public float modifiedAttackRate;
+
+    private readonly Dictionary<UpgradeType, Func<float>> playerDataDictionary = new Dictionary<UpgradeType, Func<float>>();
+    private readonly Dictionary<UpgradeType, Action> playerDataUpdateDictionary = new Dictionary<UpgradeType, Action>();
 
     private void Awake()
     {
-        playerDataDictionary.Add(UpgradeType.SkillAttackPower, () => { return playerData.AttackPower; });
+        InitializePlayerDataDictionary();
+        InitializePlayerDataUpdateDictionary();
     }
 
-    private void Start()
+    private void InitializePlayerDataDictionary()
     {
-        StartCoroutine(DebugCoroutine());
+        playerDataDictionary.Add(UpgradeType.StatsAttackPower, () => { return ModifiedAttackPower != null ? ModifiedAttackPower.Invoke() : playerData.AttackPower; });
+        playerDataDictionary.Add(UpgradeType.StatsClickPower, () => { return ModifiedClickPower != null ? ModifiedClickPower.Invoke() : playerData.ClickPower; });
+        playerDataDictionary.Add(UpgradeType.StatsAttackRate, () => { return ModifiedAttackRate != null ? ModifiedAttackRate.Invoke() : playerData.AttackRate; });
     }
 
-    IEnumerator DebugCoroutine()
+    private void InitializePlayerDataUpdateDictionary()
     {
-        while (true)
-        {
-            Debug.Log(playerDataDictionary[UpgradeType.SkillAttackPower].Invoke());
-            yield return new WaitForSeconds(1f);
-        }
+        playerDataUpdateDictionary.Add(UpgradeType.StatsAttackPower, () => playerData.AttackPower += 1f);
+        playerDataUpdateDictionary.Add(UpgradeType.StatsClickPower, () => playerData.ClickPower += 1f);
+        playerDataUpdateDictionary.Add(UpgradeType.StatsAttackRate, () => playerData.AttackRate *= 0.9f);
     }
 
-    public void UpgradeStats(UpgradeType upgradeType)
+    public void UpgradeStats(UpgradeType statType)
     {
-        switch (upgradeType)
-        {
-            case UpgradeType.StatsAttackPower:
-                playerData.AttackPower += 1;
-                break;
-            case UpgradeType.StatsClickPower:
-                playerData.ClickPower += 1;
-                break;
-            case UpgradeType.StatsAttackRate:
-                playerData.AttackRate *= 0.8f;
-                break;
-        }
+        playerDataUpdateDictionary[statType].Invoke();
     }
+
+    public float GetStat(UpgradeType statType)
+    {
+        return playerDataDictionary[statType].Invoke();
+    }
+
+
+    ////debug
+    //public void Update()
+    //{
+    //    modifiedAttackPower = playerDataDictionary[UpgradeType.StatsAttackPower].Invoke();
+    //    modifiedClickPower = playerDataDictionary[UpgradeType.StatsClickPower].Invoke();
+    //    modifiedAttackRate = playerDataDictionary[UpgradeType.StatsAttackRate].Invoke();
+    //}
 }

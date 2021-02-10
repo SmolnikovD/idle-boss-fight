@@ -344,9 +344,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c8417079abb1714b8c519dae2874679, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 10
+  maxHealth: 3
   <Health>k__BackingField: 0
-  <CoinsReward>k__BackingField: 3
+  <CoinsReward>k__BackingField: 100
   enemyUI: {fileID: 1486185050828365735}
 --- !u!1 &1486185049909183219
 GameObject:

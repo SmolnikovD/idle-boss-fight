@@ -6,7 +6,7 @@ using UnityEngine;
 public class PlayerAttack : MonoBehaviour
 {
     [SerializeField]
-    private PlayerData playerData;
+    private PlayerDataController playerDataController;
     public static event Action<int> OnPlayerAttack;
 
     private void Awake()
@@ -28,13 +28,13 @@ public class PlayerAttack : MonoBehaviour
     {
         while (true)
         {
-            yield return new WaitForSeconds(playerData.AttackRate);
-            Attack((int)playerData.ClickPower);
+            yield return new WaitForSeconds(playerDataController.GetStat(UpgradeType.StatsAttackRate));
+            Attack((int)playerDataController.GetStat(UpgradeType.StatsClickPower));
         }
     }
 
     public void OnPlayerInput()
     {
-        Attack((int)playerData.AttackPower);
+        Attack((int)playerDataController.GetStat(UpgradeType.StatsAttackPower));
     }
 }
