@@ -8071,6 +8071,79 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1818150326}
   m_CullTransparentMesh: 0
+--- !u!1001 &1848557889
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1486185048848992494, guid: 38dc02c7b20a5314ba3188770f650af0, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1486185048848992494, guid: 38dc02c7b20a5314ba3188770f650af0, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1486185049882950464, guid: 38dc02c7b20a5314ba3188770f650af0, type: 3}
+      propertyPath: m_RootOrder
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 1486185049882950464, guid: 38dc02c7b20a5314ba3188770f650af0, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1486185049882950464, guid: 38dc02c7b20a5314ba3188770f650af0, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1486185049882950464, guid: 38dc02c7b20a5314ba3188770f650af0, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1486185049882950464, guid: 38dc02c7b20a5314ba3188770f650af0, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1486185049882950464, guid: 38dc02c7b20a5314ba3188770f650af0, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1486185049882950464, guid: 38dc02c7b20a5314ba3188770f650af0, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1486185049882950464, guid: 38dc02c7b20a5314ba3188770f650af0, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1486185049882950464, guid: 38dc02c7b20a5314ba3188770f650af0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1486185049882950464, guid: 38dc02c7b20a5314ba3188770f650af0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1486185049882950464, guid: 38dc02c7b20a5314ba3188770f650af0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1486185049882950465, guid: 38dc02c7b20a5314ba3188770f650af0, type: 3}
+      propertyPath: maxHealth
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1486185049882950465, guid: 38dc02c7b20a5314ba3188770f650af0, type: 3}
+      propertyPath: <CoinsReward>k__BackingField
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1486185049882950471, guid: 38dc02c7b20a5314ba3188770f650af0, type: 3}
+      propertyPath: m_Name
+      value: EnemyFrog
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 38dc02c7b20a5314ba3188770f650af0, type: 3}
 --- !u!1 &1863670479
 GameObject:
   m_ObjectHideFlags: 0
