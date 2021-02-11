@@ -13,7 +13,12 @@ public class Enemy : MonoBehaviour
     [field: SerializeField]
     public int CoinsReward { get; protected set; } = 10;
 
-    public EnemyUI enemyUI;
+    [SerializeField]
+    protected EnemyUI enemyUI;
+    [SerializeField]
+    protected EnemyAnimations enemyAnimations;
+    [SerializeField]
+    protected GameObject enemyDeathVFX;
 
     public event Action<GameObject> OnEnemyDeath;
 
@@ -40,12 +45,14 @@ public class Enemy : MonoBehaviour
 
     protected virtual void EnemyDeath()
     {
-        OnEnemyDeath?.Invoke(this.gameObject);
-        Destroy(this.gameObject);
-    }
-
-    public void OnDestroy()
-    {
         PlayerAttack.OnPlayerAttack -= GetDamage;
+        OnEnemyDeath?.Invoke(this.gameObject);
+
+        enemyUI.gameObject.SetActive(false);
+        enemyAnimations.SetDeathAnimation();
+        var vfx = Instantiate(enemyDeathVFX);
+        Destroy(vfx, 1f);
+
+        Destroy(this.gameObject, 0.5f);
     }
 }

@@ -7,8 +7,6 @@ public class Boss : Enemy
 {
     [SerializeField]
     private BossFightTimer bossFight;
-    [SerializeField]
-    private ParticleSystem bossDeathVFX;
 
     public event Action OnBossDefeated;
     public event Action OnBossDissapeared;
@@ -23,7 +21,6 @@ public class Boss : Enemy
     protected override void EnemyDeath()
     {
         OnBossDefeated?.Invoke();
-        Instantiate(bossDeathVFX);
         base.EnemyDeath();
     }
 
@@ -32,7 +29,6 @@ public class Boss : Enemy
         if(Health >= 0)
         {
             OnBossDissapeared?.Invoke();
-            Instantiate(bossDeathVFX);
             base.EnemyDeath();
         }
     }

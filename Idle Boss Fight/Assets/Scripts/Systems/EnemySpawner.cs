@@ -6,7 +6,7 @@ using UnityEngine;
 public class EnemySpawner : MonoBehaviour
 {
     [SerializeField]
-    private GameObject enemyPrefab;
+    private GameObject[] enemyPrefabsArray;
     [SerializeField]
     private GameObject bossPrefab;
 
@@ -37,7 +37,8 @@ public class EnemySpawner : MonoBehaviour
 
     private void SpawnRegularEnemy()
     {
-        Enemy enemy = Instantiate(enemyPrefab, transform.position, Quaternion.identity).GetComponent<Enemy>();
+        int randomIndex = UnityEngine.Random.Range(0, enemyPrefabsArray.Length);
+        Enemy enemy = Instantiate(enemyPrefabsArray[randomIndex], transform.position, Quaternion.identity).GetComponent<Enemy>();
         enemy.OnEnemyDeath += OnEnemyDeath;
 
         OnEnemySpawned?.Invoke(enemy.gameObject);

@@ -10,10 +10,10 @@ public class PlayerAnimation : MonoBehaviour
 
     Action SetRandomAnimation;
 
-    private const string Attack1 = "Attack1";
-    private const string Attack2 = "Attack2";
-    private const string Idle = "Idle";
-    private const string Dizzy = "Dizzy";
+    private const string ATTACK_1 = "Attack1";
+    private const string ATTACK_2 = "Attack2";
+    private const string IDLE = "Idle";
+    private const string DIZZY = "Dizzy";
 
     private void Start()
     {
@@ -33,22 +33,22 @@ public class PlayerAnimation : MonoBehaviour
 
     public void SetAttack1Animation()
     {
-        playerAnimator.SetTrigger(Attack1);
+        playerAnimator.SetTrigger(ATTACK_1);
     }
 
     public void SetAttack2Animation()
     {
-        playerAnimator.SetTrigger(Attack2);
+        playerAnimator.SetTrigger(ATTACK_2);
     }
 
     public void SetIdleAnimation()
     {
-        playerAnimator.SetTrigger(Idle);
+        playerAnimator.SetTrigger(IDLE);
     }
 
     public void SetDizzyAnimation()
     {
-        playerAnimator.SetTrigger(Dizzy);
+        playerAnimator.SetTrigger(DIZZY);
     }
 
 }
