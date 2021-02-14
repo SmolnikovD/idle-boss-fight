@@ -58,8 +58,17 @@ public abstract class Skill : MonoBehaviour
         skillButton.interactable = true;
     }
 
-    protected virtual void OnDisable()
+#if UNITY_EDITOR
+    protected virtual void OnApplicationQuit()
     {
         SaveSystem.Save(skillData, SAVE_DATA_ID);
     }
+#endif
+
+#if UNITY_ANDROID
+    protected virtual void OnApplicationPause()
+    {
+        SaveSystem.Save(skillData, SAVE_DATA_ID);
+    }
+#endif
 }

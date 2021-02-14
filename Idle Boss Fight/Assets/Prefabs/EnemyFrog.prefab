@@ -347,7 +347,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 10
   <Health>k__BackingField: 0
-  <CoinsReward>k__BackingField: 100
+  <CoinsReward>k__BackingField: 3
   enemyUI: {fileID: 1486185050828365735}
   enemyAnimations: {fileID: 54174974475579321}
   enemyDeathVFX: {fileID: 3186559975724622207, guid: 1935bb6acb2f6094a931514c0869f75d, type: 3}

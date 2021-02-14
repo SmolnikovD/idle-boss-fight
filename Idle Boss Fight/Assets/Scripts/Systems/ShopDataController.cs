@@ -55,8 +55,17 @@ public class ShopDataController : MonoBehaviour
         costUpgradeDictionary[upgradeType].Invoke();
     }
 
-    private void OnDisable()
+#if UNITY_EDITOR
+    private void OnApplicationQuit()
     {
         SaveSystem.Save(shopData);
     }
+#endif
+
+#if UNITY_ANDROID
+    private void OnApplicationPause()
+    {
+        SaveSystem.Save(shopData);
+    }
+#endif
 }

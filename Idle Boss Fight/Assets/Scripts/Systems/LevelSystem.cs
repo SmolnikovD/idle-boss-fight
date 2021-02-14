@@ -61,9 +61,19 @@ public class LevelSystem : MonoBehaviour
         OnExperienceChanged?.Invoke();
     }
 
-    private void OnDisable()
+#if UNITY_EDITOR
+    private void OnApplicationQuit()
     {
         levelData.level = Level;
         SaveSystem.Save(levelData);
     }
+#endif
+
+#if UNITY_ANDROID
+    private void OnApplicationPause()
+    {
+        levelData.level = Level;
+        SaveSystem.Save(levelData);
+    }
+#endif
 }

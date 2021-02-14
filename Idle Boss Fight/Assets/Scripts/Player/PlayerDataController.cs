@@ -46,8 +46,17 @@ public class PlayerDataController : MonoBehaviour
         return playerDataDictionary[statType].Invoke();
     }
 
-    private void OnDisable()
+#if UNITY_EDITOR
+    private void OnApplicationQuit()
     {
         SaveSystem.Save(playerData);
     }
+#endif
+
+#if UNITY_ANDROID
+    private void OnApplicationPause()
+    {
+        SaveSystem.Save(playerData);
+    }
+#endif
 }

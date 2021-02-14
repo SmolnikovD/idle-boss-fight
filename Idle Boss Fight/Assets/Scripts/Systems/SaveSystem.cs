@@ -3,7 +3,7 @@ using UnityEngine;
 
 public static class SaveSystem
 {
-    private const string directory = "/SaveData/";
+    private const string directory = "/Saves/";
 
     public static void Save<T>(T dataToSave) where T : class, ISaveable => Save(dataToSave, "");
     public static void Save<T>(T dataToSave, string id) where T : class, ISaveable
@@ -20,7 +20,6 @@ public static class SaveSystem
     public static T Load<T>(T dataToLoad, string id) where T : class, ISaveable
     {
         string path = Application.persistentDataPath + directory + dataToLoad.GetType().ToString() + id;
-
         if (File.Exists(path))
         {
             string json = File.ReadAllText(path);
