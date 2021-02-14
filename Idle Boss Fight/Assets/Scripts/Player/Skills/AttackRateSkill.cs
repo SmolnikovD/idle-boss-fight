@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class AttackRateSkill : Skill
 {
+    protected override string SAVE_DATA_ID => "AttackRate";
+
     public override void Perform(PlayerDataController playerDataController)
     {
         float attackRateToModify = playerDataController.GetStat(UpgradeType.StatsAttackRate);

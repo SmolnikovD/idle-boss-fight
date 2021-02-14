@@ -5,25 +5,32 @@ using UnityEngine;
 
 public class CurrencySystem : MonoBehaviour
 {
-    [field: SerializeField]
-    public int Coins { get; private set; }
+    private CurrencyData currencyData = new CurrencyData();
 
-    public static event Action<int> OnCoinsAmountChanged;
+    public int Coins { get => currencyData.coins; private set => currencyData.coins = value; }
+
+    public static event Action OnCoinsAmountChanged;
 
     private void Awake()
     {
+        currencyData = SaveSystem.Load(currencyData);
         EnemySpawner.OnEnemyDeath += (enemy) => AddCoins(enemy.GetComponent<Enemy>().CoinsReward, LevelSystem.Level);
     }
 
     public void AddCoins(int amount, int multiplier)
     {
         Coins += amount * multiplier;
-        OnCoinsAmountChanged?.Invoke(Coins);
+        OnCoinsAmountChanged?.Invoke();
     }
 
     public void SpendCoins(int amount)
     {
         Coins -= amount;
-        OnCoinsAmountChanged?.Invoke(Coins);
+        OnCoinsAmountChanged?.Invoke();
+    }
+
+    private void OnDisable()
+    {
+        SaveSystem.Save(currencyData);
     }
 }

@@ -17,7 +17,6 @@ public class ShopUI : MonoBehaviour
     {
         closeShopButton.onClick.AddListener(CloseShop);
         animator = shopGameObject.GetComponent<Animator>();
-        CloseShop();
     }
 
     public void ToggleShop()

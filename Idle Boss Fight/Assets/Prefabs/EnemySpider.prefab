@@ -384,7 +384,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 20
   <Health>k__BackingField: 0
-  <CoinsReward>k__BackingField: 4
+  <CoinsReward>k__BackingField: 100
   enemyUI: {fileID: 8268750458793691384}
   enemyAnimations: {fileID: 1821444624}
   enemyDeathVFX: {fileID: 3186559975724622207, guid: 1935bb6acb2f6094a931514c0869f75d, type: 3}
@@ -647,8 +647,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 80}
-  m_SizeDelta: {x: 680, y: 106.91467}
+  m_AnchoredPosition: {x: 0, y: 50}
+  m_SizeDelta: {x: 680, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &8268750460466541618
 MonoBehaviour:

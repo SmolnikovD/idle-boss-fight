@@ -8,23 +8,38 @@ using System;
 public class LevelUI : MonoBehaviour
 {
     [SerializeField]
+    private LevelSystem levelSystem;
+
+    [SerializeField]
     private TextMeshProUGUI levelText;
     [SerializeField]
     private Slider levelProgressBar;
 
     private void Awake()
     {
-        LevelSystem.OnExperienceChanged += OnExperienceChanged;
-        LevelSystem.OnLevelChanged += OnLevelChanged;
+        LevelSystem.OnExperienceChanged += UpdateExperienceUI;
+        LevelSystem.OnLevelChanged += UpdateLevelUI;
     }
 
-    private void OnLevelChanged(int level)
+    private void Start()
     {
-        levelText.SetText(level.ToString());
+        InitializeUI();
     }
 
-    private void OnExperienceChanged(float levelPercent)
+    private void InitializeUI()
     {
+        UpdateLevelUI();
+        UpdateExperienceUI();
+    }
+
+    private void UpdateLevelUI()
+    {
+        levelText.SetText(LevelSystem.Level.ToString());
+    }
+
+    private void UpdateExperienceUI()
+    {
+        float levelPercent = (float)levelSystem.CurrentExp / levelSystem.ExpToLevelUp;
         levelProgressBar.value = levelPercent;
     }
 }

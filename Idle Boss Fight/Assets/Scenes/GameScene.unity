@@ -549,8 +549,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a40ff918f981954596ad0234e0142b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentExp: 0
-  expToLevelUp: 3
 --- !u!114 &283654598
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -563,7 +561,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c02b4e2812bebd42b292af82eee7000, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <Coins>k__BackingField: 0
 --- !u!1 &292273446
 GameObject:
   m_ObjectHideFlags: 0
@@ -1030,7 +1027,7 @@ MonoBehaviour:
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_DisabledColor: {r: 1, g: 1, b: 1, a: 1}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
@@ -1062,7 +1059,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.9803922, b: 0, a: 1}
+  m_Color: {r: 1, g: 0.9803922, b: 0, a: 0.74509805}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1947,7 +1944,6 @@ GameObject:
   - component: {fileID: 518859568}
   - component: {fileID: 518859571}
   - component: {fileID: 518859570}
-  - component: {fileID: 518859567}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -1970,21 +1966,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &518859567
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 518859565}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2a63b5cf75c68d146bface96396663d3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  <AttackPower>k__BackingField: 1
-  <ClickPower>k__BackingField: 1
-  <AttackRate>k__BackingField: 1
 --- !u!114 &518859568
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2022,7 +2003,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf6ac1ef291fd504eb433632f267817b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerData: {fileID: 518859567}
 --- !u!114 &518859571
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2214,6 +2194,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75bc51c73fd4d0d4b9d46b48e7d0167c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  levelSystem: {fileID: 283654597}
   bossFightButton: {fileID: 1402469187}
 --- !u!4 &634360633
 Transform:
@@ -2242,6 +2223,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerDataController: {fileID: 518859570}
+  currencySystem: {fileID: 283654598}
   coinsText: {fileID: 2045390775}
   attackPowerText: {fileID: 1034503584}
   clickPowerText: {fileID: 936659761}
@@ -2289,6 +2271,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81d55f8bfcae09045a43d7bb7cc5ebf9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  levelSystem: {fileID: 283654597}
   levelText: {fileID: 645367207}
   levelProgressBar: {fileID: 1116025412}
 --- !u!114 &634360638
@@ -2303,9 +2286,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ae8b6ada245cdb4d885873252894cd4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SkillAttackPowerButton: {fileID: 1971059558}
-  SkillClickPowerButton: {fileID: 1079283121}
-  SkillClickRateButton: {fileID: 333254399}
+  skillAttackPowerButton: {fileID: 1971059558}
+  skillClickPowerButton: {fileID: 1079283121}
+  skillClickRateButton: {fileID: 333254399}
 --- !u!1 &645367205
 GameObject:
   m_ObjectHideFlags: 0
@@ -2751,9 +2734,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cooldownImage: {fileID: 247096287}
   skillButton: {fileID: 1971059558}
-  <Multiplier>k__BackingField: 2
-  <Duration>k__BackingField: 5
-  <Cooldown>k__BackingField: 10
 --- !u!114 &713447630
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2785,9 +2765,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cooldownImage: {fileID: 1302737890}
   skillButton: {fileID: 333254399}
-  <Multiplier>k__BackingField: 0.3
-  <Duration>k__BackingField: 5
-  <Cooldown>k__BackingField: 30
 --- !u!114 &713447632
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2802,9 +2779,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cooldownImage: {fileID: 826905425}
   skillButton: {fileID: 1079283121}
-  <Multiplier>k__BackingField: 3
-  <Duration>k__BackingField: 5
-  <Cooldown>k__BackingField: 30
 --- !u!1 &728417441
 GameObject:
   m_ObjectHideFlags: 0
@@ -5872,7 +5846,7 @@ MonoBehaviour:
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_DisabledColor: {r: 1, g: 1, b: 1, a: 1}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
@@ -5904,7 +5878,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.15423203, g: 1, b: 0, a: 1}
+  m_Color: {r: 0.15423203, g: 1, b: 0, a: 0.74509805}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -6618,7 +6592,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1402469186
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6634,10 +6608,10 @@ RectTransform:
   m_Father: {fileID: 916277005}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.5}
-  m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 323}
-  m_SizeDelta: {x: -434.3, y: 155.56805}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 224}
+  m_SizeDelta: {x: 600, y: 140}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1402469187
 MonoBehaviour:
@@ -8219,6 +8193,7 @@ GameObject:
   - component: {fileID: 1865643324}
   - component: {fileID: 1865643323}
   - component: {fileID: 1865643325}
+  - component: {fileID: 1865643326}
   m_Layer: 0
   m_Name: UpgradeSystem
   m_TagString: Untagged
@@ -8242,6 +8217,7 @@ MonoBehaviour:
   skillController: {fileID: 713447630}
   currencySystem: {fileID: 283654598}
   shopUpgradeButtonsUI: {fileID: 1865643325}
+  shopDataController: {fileID: 1865643326}
 --- !u!4 &1865643324
 Transform:
   m_ObjectHideFlags: 0
@@ -8268,12 +8244,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3cd9c35aabc57974ba98709786a7a9f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shopDataController: {fileID: 1865643326}
   statsAttackPowerButton: {fileID: 730832230}
   statsClickPowerButton: {fileID: 1654301063}
   statsAttackRateButton: {fileID: 471269407}
   skillAttackPowerButton: {fileID: 708318066}
   skillClickPowerButton: {fileID: 1587301050}
   skillAttackRateButton: {fileID: 1818150328}
+--- !u!114 &1865643326
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1865643322}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5b6d50e5d61b1a42ac2f7e5c8541bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1868934096
 GameObject:
   m_ObjectHideFlags: 0
@@ -8671,7 +8660,7 @@ MonoBehaviour:
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_DisabledColor: {r: 1, g: 1, b: 1, a: 1}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
@@ -8703,7 +8692,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.9245283, g: 0.47027788, b: 0.31835172, a: 1}
+  m_Color: {r: 0.9245283, g: 0.47027788, b: 0.31835172, a: 0.74509805}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1

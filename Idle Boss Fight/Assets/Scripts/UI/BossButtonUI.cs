@@ -7,6 +7,8 @@ using UnityEngine.UI;
 public class BossButtonUI : MonoBehaviour
 {
     [SerializeField]
+    private LevelSystem levelSystem;
+    [SerializeField]
     private Button bossFightButton;
 
     public static event Action OnFightBossButtonPressed;
@@ -23,7 +25,7 @@ public class BossButtonUI : MonoBehaviour
 
     private void Start()
     {
-        SetFightBossButton(false);
+        SetFightBossButton(levelSystem.CurrentExp == levelSystem.ExpToLevelUp);
     }
 
     public void SetFightBossButton(bool value)

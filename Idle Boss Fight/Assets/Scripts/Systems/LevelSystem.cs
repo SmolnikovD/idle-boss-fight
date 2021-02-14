@@ -7,20 +7,23 @@ using UnityEngine.UI;
 
 public class LevelSystem : MonoBehaviour
 {
+    private LevelData levelData = new LevelData();
+
     public static int Level { get; private set; } = 1;
+    public int CurrentExp { get => levelData.currentExp; }
+    public int ExpToLevelUp { get => levelData.expToLevelUp; }
 
-    [SerializeField]
-    private int currentExp = 0;
-    [SerializeField]
-    private int expToLevelUp = 3;
-    private float levelProgressionMultiplier = 2.5f;
+    private const float LEVEL_PROGRESSION_MULTIPLIER = 2.5f;
 
-    public static event Action<float> OnExperienceChanged;
-    public static event Action<int> OnLevelChanged;
+    public static event Action OnExperienceChanged;
+    public static event Action OnLevelChanged;
     public static event Action OnLevelUpReady;
 
     private void Awake()
     {
+        levelData = SaveSystem.Load(levelData);
+        Level = levelData.level;
+
         EnemySpawner.OnEnemyDeath += (go) => AddExperience();
         EnemySpawner.OnBossDissapeared += LevelDown;
         EnemySpawner.OnBossDefeated += LevelUp;
@@ -28,21 +31,21 @@ public class LevelSystem : MonoBehaviour
 
     public void AddExperience()
     {
-        if (currentExp >= expToLevelUp) return;
+        if (levelData.currentExp >= levelData.expToLevelUp) return;
 
-        currentExp++;
-        OnExperienceChanged?.Invoke((float)currentExp / expToLevelUp);
+        levelData.currentExp++;
+        OnExperienceChanged?.Invoke();
 
-        if (currentExp >= expToLevelUp)
+        if (levelData.currentExp >= levelData.expToLevelUp)
             OnLevelUpReady?.Invoke();
     }
 
     public void LevelUp()
     {
         Level++;
-        expToLevelUp = Mathf.RoundToInt((float)expToLevelUp * levelProgressionMultiplier);
-        currentExp = 0;
-        OnLevelChanged?.Invoke(Level);
+        levelData.expToLevelUp = Mathf.RoundToInt(levelData.expToLevelUp * LEVEL_PROGRESSION_MULTIPLIER);
+        levelData.currentExp = 0;
+        OnLevelChanged?.Invoke();
     }
 
     public void LevelDown()
@@ -50,11 +53,17 @@ public class LevelSystem : MonoBehaviour
         if(Level > 1)
         {
             Level--;
-            expToLevelUp = Mathf.RoundToInt((float)expToLevelUp / levelProgressionMultiplier);
+            levelData.expToLevelUp = Mathf.RoundToInt(levelData.expToLevelUp / LEVEL_PROGRESSION_MULTIPLIER);
         }
 
-        currentExp = 0;
-        OnLevelChanged?.Invoke(Level);
-        OnExperienceChanged?.Invoke(0f);
+        levelData.currentExp = 0;
+        OnLevelChanged?.Invoke();
+        OnExperienceChanged?.Invoke();
+    }
+
+    private void OnDisable()
+    {
+        levelData.level = Level;
+        SaveSystem.Save(levelData);
     }
 }

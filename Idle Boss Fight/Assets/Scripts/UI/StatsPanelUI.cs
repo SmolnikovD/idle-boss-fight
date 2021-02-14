@@ -7,6 +7,8 @@ public class StatsPanelUI : MonoBehaviour
 {
     [SerializeField]
     private PlayerDataController playerDataController;
+    [SerializeField]
+    private CurrencySystem currencySystem;
 
     [SerializeField]
     private TextMeshProUGUI coinsText;
@@ -23,6 +25,17 @@ public class StatsPanelUI : MonoBehaviour
         CurrencySystem.OnCoinsAmountChanged += UpdateCoinsUI;
     }
 
+    private void Start()
+    {
+        InitializeUI();
+    }
+
+    private void InitializeUI()
+    {
+        UpdateStatsPanelUI();
+        UpdateCoinsUI();
+    }
+
     public void UpdateStatsPanelUI()
     {
         attackPowerText.SetText(playerDataController.GetStat(UpgradeType.StatsAttackPower).ToString());
@@ -30,8 +43,8 @@ public class StatsPanelUI : MonoBehaviour
         attackRateText.SetText(playerDataController.GetStat(UpgradeType.StatsAttackRate).ToString());
     }
 
-    public void UpdateCoinsUI(int amount)
+    public void UpdateCoinsUI()
     {
-        coinsText.SetText(amount.ToString());
+        coinsText.SetText(currencySystem.Coins.ToString());
     }
 }

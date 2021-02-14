@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class AttackPowerSkill : Skill
 {
+    protected override string SAVE_DATA_ID => "AttackPower";
+
     public override void Perform(PlayerDataController playerDataController)
     {
         float attackPowerToModify = playerDataController.GetStat(UpgradeType.StatsAttackPower);

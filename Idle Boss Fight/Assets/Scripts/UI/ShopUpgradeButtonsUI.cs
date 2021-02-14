@@ -7,6 +7,9 @@ using UnityEngine.UI;
 
 public class ShopUpgradeButtonsUI : MonoBehaviour
 {
+    [SerializeField]
+    private ShopDataController shopDataController;
+
     [Header("Stats Buttons")]
     public Button statsAttackPowerButton;
     public Button statsClickPowerButton;
@@ -30,9 +33,24 @@ public class ShopUpgradeButtonsUI : MonoBehaviour
         skillAttackRateButton.onClick.AddListener(() => OnSkillsUpgradeButtonClick(skillAttackRateButton, UpgradeType.SkillAttackRate));
     }
 
-
-    public void UpdateText(Button button, int newPrice)
+    private void Start()
     {
-        button.gameObject.GetComponentInChildren<TextMeshProUGUI>().SetText(newPrice.ToString());
+        InitializeUI();
+    }
+
+    private void InitializeUI()
+    {
+        UpdateText(statsAttackPowerButton, shopDataController.GetCost(UpgradeType.StatsAttackPower));
+        UpdateText(statsClickPowerButton, shopDataController.GetCost(UpgradeType.StatsClickPower));
+        UpdateText(statsAttackRateButton, shopDataController.GetCost(UpgradeType.StatsAttackRate));
+
+        UpdateText(skillAttackPowerButton, shopDataController.GetCost(UpgradeType.SkillAttackPower));
+        UpdateText(skillClickPowerButton, shopDataController.GetCost(UpgradeType.SkillClickPower));
+        UpdateText(skillAttackRateButton, shopDataController.GetCost(UpgradeType.SkillAttackRate));
+    }
+
+    public void UpdateText(Button button, int cost)
+    {
+        button.gameObject.GetComponentInChildren<TextMeshProUGUI>().SetText(cost.ToString());
     }
 }

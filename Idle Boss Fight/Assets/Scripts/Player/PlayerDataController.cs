@@ -5,23 +5,19 @@ using UnityEngine;
 
 public class PlayerDataController : MonoBehaviour
 {
-    [SerializeField]
-    private PlayerData playerData;
+    private PlayerData playerData = new PlayerData();
 
     public Func<float> ModifiedAttackPower;
     public Func<float> ModifiedClickPower;
     public Func<float> ModifiedAttackRate;
-
-    ////debug
-    //public float modifiedAttackPower;
-    //public float modifiedClickPower;
-    //public float modifiedAttackRate;
 
     private readonly Dictionary<UpgradeType, Func<float>> playerDataDictionary = new Dictionary<UpgradeType, Func<float>>();
     private readonly Dictionary<UpgradeType, Action> playerDataUpdateDictionary = new Dictionary<UpgradeType, Action>();
 
     private void Awake()
     {
+        playerData = SaveSystem.Load(playerData);
+
         InitializePlayerDataDictionary();
         InitializePlayerDataUpdateDictionary();
     }
@@ -37,7 +33,7 @@ public class PlayerDataController : MonoBehaviour
     {
         playerDataUpdateDictionary.Add(UpgradeType.StatsAttackPower, () => playerData.AttackPower += 1f);
         playerDataUpdateDictionary.Add(UpgradeType.StatsClickPower, () => playerData.ClickPower += 1f);
-        playerDataUpdateDictionary.Add(UpgradeType.StatsAttackRate, () => playerData.AttackRate *= 0.9f);
+        playerDataUpdateDictionary.Add(UpgradeType.StatsAttackRate, () => playerData.AttackRate = (float)Math.Round(playerData.AttackRate *= 0.95f,2));
     }
 
     public void UpgradeStats(UpgradeType statType)
@@ -50,12 +46,8 @@ public class PlayerDataController : MonoBehaviour
         return playerDataDictionary[statType].Invoke();
     }
 
-
-    ////debug
-    //public void Update()
-    //{
-    //    modifiedAttackPower = playerDataDictionary[UpgradeType.StatsAttackPower].Invoke();
-    //    modifiedClickPower = playerDataDictionary[UpgradeType.StatsClickPower].Invoke();
-    //    modifiedAttackRate = playerDataDictionary[UpgradeType.StatsAttackRate].Invoke();
-    //}
+    private void OnDisable()
+    {
+        SaveSystem.Save(playerData);
+    }
 }

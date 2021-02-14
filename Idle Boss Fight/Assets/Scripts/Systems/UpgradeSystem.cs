@@ -12,8 +12,8 @@ public class UpgradeSystem : MonoBehaviour
     private CurrencySystem currencySystem;
     [SerializeField]
     private ShopUpgradeButtonsUI shopUpgradeButtonsUI;
-
-    private readonly ShopData shopData = new ShopData();
+    [SerializeField]
+    private ShopDataController shopDataController;
 
     public static event Action OnUpgrade;
 
@@ -27,7 +27,7 @@ public class UpgradeSystem : MonoBehaviour
     {
         if (TryUpgrade(upgradeType))
         {
-            shopUpgradeButtonsUI.UpdateText(button, shopData.GetCost(upgradeType));
+            shopUpgradeButtonsUI.UpdateText(button, shopDataController.GetCost(upgradeType));
             performUpgradeAction(upgradeType);
 
             OnUpgrade?.Invoke();
@@ -36,10 +36,10 @@ public class UpgradeSystem : MonoBehaviour
 
     private bool TryUpgrade(UpgradeType upgradeType)
     {
-        if (currencySystem.Coins >= shopData.GetCost(upgradeType))
+        if (currencySystem.Coins >= shopDataController.GetCost(upgradeType))
         {
-            currencySystem.SpendCoins(shopData.GetCost(upgradeType));
-            shopData.IncreaseCost(upgradeType);
+            currencySystem.SpendCoins(shopDataController.GetCost(upgradeType));
+            shopDataController.IncreaseCost(upgradeType);
             return true;
         }
         return false;

@@ -24,9 +24,21 @@ public class SkillController : MonoBehaviour
         skillsDictionary.Add(UpgradeType.SkillClickPower, clickPowerSkill);
         skillsDictionary.Add(UpgradeType.SkillAttackRate, attackRateSkill);
 
-        skillButtonsUI.OnSkillAttackPowerButtonClicked += () => attackPowerSkill.Perform(playerDataController);
-        skillButtonsUI.OnSkillClickPowerButtonClicked += () => clickPowerSkill.Perform(playerDataController);
-        skillButtonsUI.OnSkillClickRateButtonClicked += () => attackRateSkill.Perform(playerDataController);
+        skillButtonsUI.OnSkillAttackPowerButtonClicked += () =>
+        {
+            attackPowerSkill.Perform(playerDataController);
+            skillButtonsUI.StartCooldownUIRoutine(attackPowerSkill);
+        };
+        skillButtonsUI.OnSkillClickPowerButtonClicked += () =>
+        {
+            clickPowerSkill.Perform(playerDataController);
+            skillButtonsUI.StartCooldownUIRoutine(clickPowerSkill);
+        };
+        skillButtonsUI.OnSkillClickRateButtonClicked += () =>
+        {
+            attackRateSkill.Perform(playerDataController);
+            skillButtonsUI.StartCooldownUIRoutine(attackRateSkill);
+        };
     }
 
     public void TryUpgrade(UpgradeType upgradeType)

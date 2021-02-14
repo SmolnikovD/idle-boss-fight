@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class ClickPowerSkill : Skill
 {
+    protected override string SAVE_DATA_ID => "ClickPower";
+
     public override void Perform(PlayerDataController playerDataController)
     {
         float clickPowerToModify = playerDataController.GetStat(UpgradeType.StatsClickPower);
