@@ -355,6 +355,24 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 147714955}
   m_CullTransparentMesh: 0
+--- !u!1 &185310697 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2066896392038628118, guid: 45288819fde2143449a96207b14db0bb, type: 3}
+  m_PrefabInstance: {fileID: 889086590}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &185310698
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 185310697}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58934f6c81ebde648a002c13f9529b8c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackSound: {fileID: 8300000, guid: 3492ff23250952847984da69b8b66fc3, type: 3}
 --- !u!1 &242284470
 GameObject:
   m_ObjectHideFlags: 0
@@ -561,6 +579,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c02b4e2812bebd42b292af82eee7000, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  coinSound: {fileID: 8300000, guid: 94d2c2e8302d4254798f40ade17bf3b7, type: 3}
 --- !u!1 &292273446
 GameObject:
   m_ObjectHideFlags: 0
@@ -1059,7 +1078,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.9803922, b: 0, a: 0.74509805}
+  m_Color: {r: 0.5372549, g: 0.5372549, b: 0.5372549, a: 0.74509805}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -2175,6 +2194,7 @@ GameObject:
   - component: {fileID: 634360637}
   - component: {fileID: 634360632}
   - component: {fileID: 634360638}
+  - component: {fileID: 634360639}
   m_Layer: 0
   m_Name: UIController
   m_TagString: Untagged
@@ -2289,6 +2309,22 @@ MonoBehaviour:
   skillAttackPowerButton: {fileID: 1971059558}
   skillClickPowerButton: {fileID: 1079283121}
   skillClickRateButton: {fileID: 333254399}
+--- !u!114 &634360639
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 634360631}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7463f4b85a3149b418453747893ff11e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  musicButton: {fileID: 2139590444}
+  buttonImage: {fileID: 2139590445}
+  musicOnImage: {fileID: 21300000, guid: 493fd7d0e626d4db091f50928058f0b8, type: 3}
+  musicOffImage: {fileID: 21300000, guid: a7e1e81117197488db394021a1b04920, type: 3}
 --- !u!1 &645367205
 GameObject:
   m_ObjectHideFlags: 0
@@ -3489,6 +3525,7 @@ MonoBehaviour:
   - {fileID: 5317471091570668633, guid: af6f241865b688c49bbdf11e92b15a30, type: 3}
   - {fileID: 8268750459475667992, guid: 4a1a239679388294cb49373219f133ab, type: 3}
   bossPrefab: {fileID: 6656875148245423735, guid: 63dba3de6f37da645b548475eaefd56f, type: 3}
+  enemyDeathSound: {fileID: 8300000, guid: bf1d34bc82469b0449c2d7274063c263, type: 3}
 --- !u!4 &884788850
 Transform:
   m_ObjectHideFlags: 0
@@ -5878,7 +5915,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.15423203, g: 1, b: 0, a: 0.74509805}
+  m_Color: {r: 0.5377358, g: 0.5377358, b: 0.5377358, a: 0.54509807}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -6089,7 +6126,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 0
+  m_Interactable: 1
   m_TargetGraphic: {fileID: 0}
   m_FillRect: {fileID: 1408900800}
   m_HandleRect: {fileID: 0}
@@ -9107,7 +9144,7 @@ GameObject:
   - component: {fileID: 2139590445}
   - component: {fileID: 2139590444}
   m_Layer: 5
-  m_Name: PauseButton
+  m_Name: MuteButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9195,7 +9232,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: ff645a4c999a14801b1a714a2087338a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 493fd7d0e626d4db091f50928058f0b8, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

@@ -9,6 +9,8 @@ public class EnemySpawner : MonoBehaviour
     private GameObject[] enemyPrefabsArray;
     [SerializeField]
     private GameObject bossPrefab;
+    [SerializeField]
+    private AudioClip enemyDeathSound;
 
     private Action SpawnEnemy;
 
@@ -23,6 +25,7 @@ public class EnemySpawner : MonoBehaviour
         BossButtonUI.OnFightBossButtonPressed += PrepareBossFight;
 
         OnEnemyDeath += (x) => SpawnEnemy();
+        OnEnemyDeath += (x) => AudioPlayer.Instance.Play(enemyDeathSound);
     }
 
     private void Start()

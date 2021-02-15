@@ -6,6 +6,8 @@ using UnityEngine;
 public class CurrencySystem : MonoBehaviour
 {
     private CurrencyData currencyData = new CurrencyData();
+    [SerializeField]
+    private AudioClip coinSound;
 
     public int Coins { get => currencyData.coins; private set => currencyData.coins = value; }
 
@@ -15,6 +17,7 @@ public class CurrencySystem : MonoBehaviour
     {
         currencyData = SaveSystem.Load(currencyData);
         EnemySpawner.OnEnemyDeath += (enemy) => AddCoins(enemy.GetComponent<Enemy>().CoinsReward, LevelSystem.Level);
+        OnCoinsAmountChanged += () => AudioPlayer.Instance.Play(coinSound);
     }
 
     public void AddCoins(int amount, int multiplier)
